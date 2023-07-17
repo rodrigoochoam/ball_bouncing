@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Simulation - ball movement</title>
+</head>
+
+<body>
+  <p>Rodrigo Ochoa Mayagoitia - Ball Movement</p>
+  <!-- YOUR CODE STARTS HERE -->
+
+  <div id="ball" style="z-index: 5;
+     position: absolute;
+     left: 0px;
+     top: 200px;
+     width: 100px;
+     height: 100px;
+     border-radius: 50%;
+     background: black;">
+  </div>
+
+  <!-- YOUR CODE ENDS HERE -->
+</body>
+<!-- DO NOT EDIT PAST THIS POINT -->
+<script>
+var positionX = 0;
+var positionY = 200; // Initial Y position set to 200
+var velocityX = 20; // Horizontal velocity
+var velocityY = 20; // Vertical velocity
+var ball = document.getElementById("ball");
+
+function getRandomColor() {
+  var letters = "0123456789ABCDEF";
+  var color = "#";
+  for (var i = 0; i < 6; i++) {
+    color = color + letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
+function moveBall() {
+  var ballWidth = ball.clientWidth;
+  var ballHeight = ball.clientHeight;
+
+  // Get the dimensions of the window
+  var windowWidth = window.innerWidth;
+  var windowHeight = window.innerHeight;
+
+  // Calculate the maximum X and Y positions considering the window dimensions and ball size
+  var maxX = windowWidth - ballWidth;
+  var maxY = windowHeight - ballHeight;
+
+  positionX = positionX + velocityX;
+  positionY = positionY + velocityY;
+
+  // Check X-axis boundaries
+  if (positionX > maxX) {
+    positionX = maxX;
+    velocityX = -velocityX; // Reverse the horizontal direction
+    ball.style.backgroundColor = getRandomColor(); // Change the ball color
+  } else if (positionX < 0) {
+    positionX = 0;
+    velocityX = -velocityX; // Reverse the horizontal direction
+    ball.style.backgroundColor = getRandomColor(); // Change the ball color
+  }
+
+  // Check Y-axis boundaries
+  if (positionY > maxY) {
+    positionY = maxY;
+    velocityY = -velocityY; // Reverse the vertical direction
+    ball.style.backgroundColor = getRandomColor(); // Change the ball color
+  } else if (positionY < 0) {
+    positionY = 0;
+    velocityY = -velocityY; // Reverse the vertical direction
+    ball.style.backgroundColor = getRandomColor(); // Change the ball color
+  }
+
+  ball.style.left = positionX + "px";
+  ball.style.top = positionY + "px";
+}
+
+setInterval(moveBall, 30); // Adjust the interval for smoother animation if needed
+
+</script>
+
+</html>
